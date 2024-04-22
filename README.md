@@ -35,7 +35,7 @@
   <tr>
     <th>css</th>
     <th>on going</th>
-    <th>None</th>
+    <th>Link</th>
   </tr>
   <tr>
     <th>js</th>
