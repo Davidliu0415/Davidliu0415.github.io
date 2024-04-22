@@ -41,7 +41,8 @@
     <th>css</th>
     <th>on going</th>
     <th>Link</th>
-    <th>[笔记链接]（https://github.com/Davidliu0415/Davidliu0415.github.io/blob/main/%E7%AC%94%E8%AE%B0.md）</th>
+    <th>[笔记链接](笔记.md)</th>
+  
   </tr>
   <tr>
     <th>js</th>
@@ -56,6 +57,8 @@
     <th></th>
   </tr>
 </table>
+
 ---
+
 # 日志
 [日志](日志.md)
