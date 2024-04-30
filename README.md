@@ -28,7 +28,7 @@
   <tr>
     <th>数据结构</th>
     <th>on going</th>
-    <th>链表</th>
+    <th>栈（实现顺序表）</th>
     <th></th>
   </tr>
   <tr>
