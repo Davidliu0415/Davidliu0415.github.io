@@ -40,7 +40,7 @@
   <tr>
     <th>css</th>
     <th>on going</th>
-    <th>Link</th>
+    <th>box</th>
     <th>
 
 [笔记链接](笔记.md)</th>
@@ -64,3 +64,5 @@
 
 # 日志
 [日志](日志.md)
+# 照片回廊
+[照片回廊](picture\照片回廊.html)
