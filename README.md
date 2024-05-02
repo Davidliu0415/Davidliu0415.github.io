@@ -40,7 +40,7 @@
   <tr>
     <th>css</th>
     <th>on going</th>
-    <th>box</th>
+    <th>媒体类型</th>
     <th>
 
 [笔记链接](笔记.md)</th>
