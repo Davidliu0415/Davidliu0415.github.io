@@ -43,14 +43,16 @@
     <th>媒体类型</th>
     <th>
 
-[笔记链接](笔记.md)</th>
-  
+[笔记链接](笔记css.md)</th>
+
   </tr>
   <tr>
     <th>js</th>
-    <th>no</th>
+    <th>on going</th>
     <th>None</th>
-    <th></th>
+    <th> 
+
+[笔记链接](笔记js.md)</th>
   </tr>
   <tr>
     <th>后端</th>
