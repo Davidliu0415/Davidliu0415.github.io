@@ -39,8 +39,8 @@
   </tr>
   <tr>
     <th>css</th>
-    <th>on going</th>
-    <th>媒体类型</th>
+    <th>finish</th>
+    <th>done</th>
     <th>
 
 [笔记链接](笔记.md)</th>
@@ -48,7 +48,7 @@
   </tr>
   <tr>
     <th>js</th>
-    <th>no</th>
+    <th>on going</th>
     <th>None</th>
     <th></th>
   </tr>
