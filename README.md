@@ -55,10 +55,30 @@
 [笔记链接](笔记js.md)</th>
   </tr>
   <tr>
-    <th>后端</th>
-    <th>no</th>
-    <th>None</th>
-    <th></th>
+    <th>mySQL</th>
+    <th>on going</th>
+    <th>0/19</th>
+    <th>  
+  
+  [笔记链接](mysql\笔记MySQL.md)</th>
+  </tr>
+  </tr>
+  <tr>
+    <th>javaweb</th>
+    <th>on going</th>
+    <th>0/15</th>
+    <th> 
+
+[笔记链接](javaweb\笔记Javaweb.md)</th>
+  </tr>
+  </tr>
+  <tr>
+    <th>vue2+vue3</th>
+    <th>on going</th>
+    <th>0/19</th>
+    <th> 
+
+[笔记链接](vue2+vue3\笔记vue2+vue3.md)</th>
   </tr>
 </table>
 
