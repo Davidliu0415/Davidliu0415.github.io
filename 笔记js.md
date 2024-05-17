@@ -44,3 +44,5 @@ function myFunction(a, b) {
 ```
 # JavaScript 语句
 [学习链接](https://www.runoob.com/js/js-statements.html)
+# JavaScript 数据类型
+[学习链接](https://www.runoob.com/js/js-datatypes.html)
