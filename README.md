@@ -55,7 +55,9 @@
 [笔记链接](笔记js.md)</th>
   </tr>
   <tr>
-    <th>mySQL</th>
+    <th>
+
+[mysql](https://www.bilibili.com/video/BV1iF411z7Pu/?spm_id_from=333.999.0.0)</th>
     <th>on going</th>
     <th>0/19</th>
     <th>  
@@ -64,7 +66,9 @@
   </tr>
   </tr>
   <tr>
-    <th>javaweb</th>
+    <th>
+
+[Javaweb](https://www.bilibili.com/video/BV1m84y1w7Tb/?spm_id_from=333.999.0.0&vd_source=aa3bd38ab9f4979f8501b89f16fdbfba)</th>
     <th>on going</th>
     <th>0/15</th>
     <th> 
@@ -73,7 +77,9 @@
   </tr>
   </tr>
   <tr>
-    <th>vue2+vue3</th>
+    <th>
+
+[vue2+vue3](https://www.bilibili.com/video/BV1HV4y1a7n4/?spm_id_from=333.999.0.0&vd_source=aa3bd38ab9f4979f8501b89f16fdbfba)</th>
     <th>on going</th>
     <th>0/19</th>
     <th> 
