@@ -59,7 +59,7 @@
 
 [mysql](https://www.bilibili.com/video/BV1iF411z7Pu/?spm_id_from=333.999.0.0)</th>
     <th>on going</th>
-    <th>0/19</th>
+    <th>1/19</th>
     <th>  
   
   [笔记链接](mysql\笔记MySQL.md)</th>
