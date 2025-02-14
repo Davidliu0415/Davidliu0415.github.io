@@ -5,7 +5,23 @@
 
 # 待办
 ---
-# 学习进度
+# 课程模块
+<table>
+  <tr>
+    <th>项目</th>
+    <th>笔记链接</th>
+  </tr>
+  <tr>
+    <th>G0135</th>
+    <th></th>
+  </tr>
+  <tr>
+    <th>G0234</th>
+    <th></th>
+  </tr>
+ ---
+</table>
+# 自学模块
 <table>
   <tr>
     <th>学习项目</th>
@@ -14,9 +30,15 @@
     <th>笔记链接</th>
   </tr>
   <tr>
-    <th>c</th>
+    <th>Java</th>
     <th>on going</th>
-    <th>structure</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <th>Javaweb</th>
+    <th>on going</th>
+    <th></th>
     <th></th>
   </tr>
  
