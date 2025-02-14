@@ -13,11 +13,11 @@
   </tr>
   <tr>
     <th>G0135</th>
-    <th></th>
+    <th>[文档位置](https://github.com/Davidliu0415/Davidliu0415.github.io/tree/main/2025/02/G0135)</th>
   </tr>
   <tr>
     <th>G0234</th>
-    <th>[文档位置](2025\02\G0234)</th>
+    <th>[文档位置](https://github.com/Davidliu0415/Davidliu0415.github.io/tree/main/2025/02/G0234)</th>
   </tr>
  ---
 </table>
