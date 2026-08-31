@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Zhuo Liu's interactive portfolio — AI, systems, and quantitative research." />
+    <title>Zhuo Liu — Portfolio</title>
+    <link rel="preconnect" href="https://unpkg.com" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQx3vYI0yR6ezS6ixK0jzQW7B09P7mU=" crossorigin="" />
+    <style>
+      :root { --paper:#f3f0e8; --ink:#152019; --muted:#697168; --line:#c9c7bd; --forest:#17392d; --signal:#ff5b22; --sand:#e5dfd0; }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body { background:var(--paper); color:var(--ink); font-family:Arial, Helvetica, sans-serif; margin:0; }
+      a { color:inherit; text-decoration:none; }
+      button { font:inherit; }
+      .shell { padding-left:clamp(1.25rem, 6vw, 6rem); padding-right:clamp(1.25rem, 6vw, 6rem); }
+      header { align-items:center; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; padding:1.1rem clamp(1.25rem, 6vw, 6rem); position:relative; z-index:5; }
+      .brand { align-items:center; display:flex; font-size:.77rem; font-weight:700; gap:.7rem; letter-spacing:.13em; }
+      .brand-mark { align-items:center; background:var(--forest); color:var(--paper); display:inline-flex; font-size:.66rem; height:2rem; justify-content:center; letter-spacing:0; width:2rem; }
+      nav { display:flex; gap:clamp(.8rem, 3vw, 2.2rem); }
+      nav a { align-items:center; display:flex; font-size:.75rem; font-weight:700; gap:.25rem; letter-spacing:.06em; }
+      svg { height:1rem; width:1rem; }
+      .hero { border-bottom:1px solid var(--line); display:grid; gap:2rem; grid-template-columns:minmax(0,1fr) minmax(220px,.38fr); min-height:650px; padding-bottom:clamp(3.5rem,8vw,7rem); padding-top:clamp(4.5rem,11vw,10rem); }
+      .hero-copy { max-width:900px; }
+      .eyebrow { color:var(--signal); font-size:.7rem; font-weight:700; letter-spacing:.13em; margin:0 0 1.4rem; text-transform:uppercase; }
+      h1,h2,h3,p { margin-top:0; }
+      h1,h2,h3 { font-family:Georgia, 'Times New Roman', serif; font-weight:400; letter-spacing:-.055em; }
+      h1 { font-size:clamp(3rem,7.25vw,7.6rem); line-height:.91; margin-bottom:2rem; }
+      h1 em { color:var(--forest); font-weight:400; }
+      .lede { font-size:clamp(1rem,1.55vw,1.28rem); line-height:1.55; max-width:590px; }
+      .hero-actions { display:flex; flex-wrap:wrap; gap:.75rem; margin-top:2.1rem; }
+      .button { align-items:center; border:1px solid var(--forest); display:inline-flex; font-size:.76rem; font-weight:700; gap:.6rem; padding:.9rem 1.05rem; }
+      .button.primary { background:var(--forest); color:white; }
+      .button.ghost { color:var(--forest); }
+      .button:hover, .text-link:hover, .contact-link:hover { color:var(--signal); }
+      .hero-index { align-self:end; border-top:3px solid var(--signal); padding-top:1rem; }
+      .hero-index > p { font-size:.72rem; font-weight:700; letter-spacing:.12em; margin-bottom:2rem; text-transform:uppercase; }
+      dl { margin:0; }
+      dl div { border-top:1px solid var(--line); display:grid; gap:.5rem; grid-template-columns:85px 1fr; padding:.75rem 0; }
+      dt { color:var(--muted); font-size:.74rem; }
+      dd { font-size:.78rem; margin:0; }
+      .journey,.work { padding-bottom:clamp(4rem,8vw,8rem); padding-top:clamp(4rem,8vw,7.5rem); }
+      .section-heading { align-items:end; display:flex; gap:2rem; justify-content:space-between; margin-bottom:2.75rem; }
+      .section-heading h2 { font-size:clamp(2.45rem,5vw,5rem); line-height:.96; margin-bottom:0; max-width:720px; }
+      .section-heading > p { color:var(--muted); font-size:.9rem; line-height:1.55; max-width:280px; }
+      .journey-layout { display:grid; gap:1rem; grid-template-columns:minmax(0,1.45fr) minmax(280px,.55fr); }
+      .map-frame { background:var(--sand); min-height:570px; position:relative; }
+      #map { height:570px; width:100%; }
+      .map-caption { align-items:center; background:var(--paper); bottom:1rem; display:inline-flex; font-size:.68rem; gap:.35rem; left:1rem; padding:.6rem .7rem; position:absolute; z-index:450; }
+      .route-marker-wrap { background:transparent; border:0; }
+      .route-marker { align-items:center; background:var(--signal); border:2px solid var(--paper); border-radius:50%; box-shadow:0 0 0 5px rgba(255,91,34,.19); color:var(--paper); cursor:pointer; display:flex; font-size:.65rem; font-weight:700; height:42px; justify-content:center; padding:0; width:42px; }
+      .route-tooltip { background:var(--ink); border:0; border-radius:0; box-shadow:none; color:white; font-family:Arial,Helvetica,sans-serif; font-size:.75rem; line-height:1.45; padding:.6rem .7rem; }
+      .route-tooltip:before { border-top-color:var(--ink); }
+      .stop-panel { background:var(--forest); color:var(--paper); display:flex; flex-direction:column; justify-content:space-between; min-height:570px; padding:clamp(1.5rem,3vw,2.35rem); }
+      .active-stop .eyebrow { color:#ffb79f; }
+      .active-place { font-size:.78rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+      .active-place span { color:#aac3b3; font-weight:400; }
+      .active-stop h3 { font-size:clamp(2.05rem,3.6vw,3.2rem); line-height:1; margin:1.3rem 0; }
+      .active-stop > p:not(.eyebrow):not(.active-place) { color:#d6dfd6; font-size:.93rem; line-height:1.6; }
+      .active-year { border-bottom:1px solid #7fa08e; color:#aac3b3; display:inline-block; font-size:.7rem; font-weight:700; letter-spacing:.08em; margin-top:1.4rem; padding-bottom:.35rem; text-transform:uppercase; }
+      .stop-list { border-top:1px solid #7fa08e; }
+      .stop-item { background:transparent; border:0; border-bottom:1px solid #7fa08e; color:#d6dfd6; cursor:pointer; display:grid; gap:.3rem .65rem; grid-template-columns:2rem 1fr; padding:.9rem 0; text-align:left; width:100%; }
+      .stop-item > span { color:#aac3b3; font-size:.65rem; padding-top:.1rem; }
+      .stop-item strong { font-size:.83rem; font-weight:700; }
+      .stop-item em { color:#aac3b3; font-size:.7rem; font-style:normal; grid-column:2; }
+      .stop-item.active,.stop-item:hover { color:#ffb79f; }
+      .work { border-top:1px solid var(--line); }
+      .text-link { align-items:center; display:inline-flex; flex-shrink:0; font-size:.75rem; font-weight:700; gap:.4rem; }
+      .project-grid { display:grid; grid-template-columns:repeat(3,1fr); }
+      .project-card { border:1px solid var(--line); border-left:0; min-height:350px; padding:1.25rem; transition:background .2s ease,color .2s ease; }
+      .project-card:first-child { border-left:1px solid var(--line); }
+      .project-card:hover { background:var(--forest); color:white; }
+      .project-top { align-items:center; color:var(--signal); display:flex; font-size:.7rem; font-weight:700; justify-content:space-between; letter-spacing:.1em; }
+      .project-card > p:not(.project-description) { color:var(--muted); font-size:.7rem; font-weight:700; letter-spacing:.1em; margin:4rem 0 1rem; text-transform:uppercase; }
+      .project-card:hover > p:not(.project-description) { color:#aac3b3; }
+      .project-card h3 { font-size:clamp(2rem,3vw,3.2rem); line-height:.96; margin-bottom:1.7rem; }
+      .project-rule { background:var(--signal); display:block; height:3px; width:44px; }
+      .project-description { font-size:.88rem; line-height:1.55; margin:1.25rem 0 0; max-width:300px; }
+      .closing { background:var(--ink); color:var(--paper); padding-bottom:clamp(4.5rem,10vw,9rem); padding-top:clamp(4.5rem,10vw,9rem); }
+      .closing .eyebrow { color:#ffb79f; }
+      .closing h2 { font-size:clamp(2.7rem,6vw,6.3rem); line-height:.95; margin-bottom:2.8rem; max-width:1000px; }
+      .contact-link { align-items:center; color:#ffb79f; display:inline-flex; font-size:clamp(1rem,2vw,1.55rem); gap:.45rem; text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:.26rem; }
+      footer { align-items:center; background:var(--ink); border-top:1px solid #465048; color:#aab2aa; display:flex; font-size:.7rem; justify-content:space-between; letter-spacing:.04em; padding-bottom:1.1rem; padding-top:1.1rem; }
+      @media (max-width:800px) { header { align-items:flex-start; gap:1rem; } nav { align-items:flex-end; flex-direction:column; gap:.55rem; } .hero,.journey-layout { grid-template-columns:1fr; } .hero { min-height:auto; } .section-heading { align-items:flex-start; flex-direction:column; gap:1rem; } .section-heading > p { margin-bottom:0; } .map-frame,#map,.stop-panel { min-height:480px; } #map { height:480px; } .project-grid { grid-template-columns:1fr; } .project-card,.project-card:first-child { border-left:1px solid var(--line); border-top:0; } .project-card:first-child { border-top:1px solid var(--line); } .project-card > p:not(.project-description) { margin-top:2.75rem; } footer { align-items:flex-start; flex-direction:column; gap:.5rem; } }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="#top" aria-label="Zhuo Liu home"><span class="brand-mark">ZL</span><span>ZHUO LIU</span></a>
+      <nav aria-label="Main navigation">
+        <a href="#journey">Journey</a>
+        <a href="#work">Selected work</a>
+        <a href="https://github.com/Davidliu0415" target="_blank" rel="noreferrer">GitHub ↗</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="top" class="hero shell">
+        <div class="hero-copy">
+          <p class="eyebrow">Portfolio / 2026</p>
+          <h1>I build intelligent tools<br /><em>with a map in mind.</em></h1>
+          <p class="lede">Zhuo Liu is a Computer Science and Technology student at Xiamen University Malaysia, exploring the overlap of AI, systems, and quantitative thinking.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#journey">Explore the route ↗</a>
+            <a class="button ghost" href="mailto:15114153515@163.com">Start a conversation</a>
+          </div>
+        </div>
+        <aside class="hero-index" aria-label="Portfolio summary">
+          <p>Field notes</p>
+          <dl>
+            <div><dt>Focus</dt><dd>AI / Systems / Quant</dd></div>
+            <div><dt>Based in</dt><dd>Kuala Lumpur</dd></div>
+            <div><dt>Currently</dt><dd>Building in public</dd></div>
+          </dl>
+        </aside>
+      </section>
+
+      <section id="journey" class="journey shell">
+        <div class="section-heading">
+          <div><p class="eyebrow">01 / Personal coordinates</p><h2>Three places, one continuous route.</h2></div>
+          <p>Choose a marker, or select a stop below, to move through the map.</p>
+        </div>
+        <div class="journey-layout">
+          <div class="map-frame">
+            <div id="map" aria-label="Interactive map showing Dandong, Kuala Lumpur, and Nanjing"></div>
+            <span class="map-caption">⌖ Three highlighted coordinates</span>
+          </div>
+          <div class="stop-panel">
+            <div class="active-stop" aria-live="polite">
+              <p class="eyebrow" id="active-eyebrow"></p>
+              <p class="active-place" id="active-place"></p>
+              <h3 id="active-title"></h3>
+              <p id="active-description"></p>
+              <span class="active-year" id="active-year"></span>
+            </div>
+            <div class="stop-list" aria-label="Route stops" id="stop-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="work" class="work shell">
+        <div class="section-heading">
+          <div><p class="eyebrow">02 / Selected work</p><h2>Research that becomes a usable system.</h2></div>
+          <a class="text-link" href="https://github.com/Davidliu0415" target="_blank" rel="noreferrer">View all repositories ↗</a>
+        </div>
+        <div class="project-grid">
+          <a class="project-card" href="https://github.com/Davidliu0415/Face_Sketches_AI" target="_blank" rel="noreferrer"><div class="project-top"><span>01</span><span>↗</span></div><p>Computer Vision</p><h3>Face Sketches AI</h3><span class="project-rule"></span><p class="project-description">Cross-modal photo-to-sketch retrieval built with MobileFaceNet and metric-learning objectives.</p></a>
+          <a class="project-card" href="https://github.com/Davidliu0415/AIinterview" target="_blank" rel="noreferrer"><div class="project-top"><span>02</span><span>↗</span></div><p>AI Systems</p><h3>AI Interview Agent</h3><span class="project-rule"></span><p class="project-description">A local AI interviewer for Java backend roles, built around FastAPI, LangChain, DeepSeek, and MySQL.</p></a>
+          <a class="project-card" href="https://github.com/Davidliu0415/fin" target="_blank" rel="noreferrer"><div class="project-top"><span>03</span><span>↗</span></div><p>Quantitative Research</p><h3>Fin Research Lab</h3><span class="project-rule"></span><p class="project-description">A source-only quantitative research and backtesting workspace, structured for careful experiment design.</p></a>
+        </div>
+      </section>
+
+      <section class="closing shell">
+        <p class="eyebrow">Next coordinate</p>
+        <h2>Open to conversations about applied AI, thoughtful systems, and data-driven products.</h2>
+        <a class="contact-link" href="mailto:15114153515@163.com">15114153515@163.com ↗</a>
+      </section>
+    </main>
+    <footer class="shell"><span>© 2026 Zhuo Liu</span><span>Designed as a living route, not a static resume.</span></footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script>
+      const stops = [
+        { id:'dandong', eyebrow:'01 / Origins', city:'Dandong', country:'Liaoning, China', title:'A northern starting point', description:'Dandong is the first coordinate in my personal map: a place that continues to ground a curiosity for systems, people, and distance.', coordinates:[40.129,124.3547], year:'Origin' },
+        { id:'kualalumpur', eyebrow:'02 / Learning', city:'Kuala Lumpur', country:'Malaysia', title:'Xiamen University Malaysia', description:'Studying Computer Science and Technology at Xiamen University Malaysia: turning ideas into working software across AI, web systems, and data.', coordinates:[3.139,101.6869], year:'2023 — now' },
+        { id:'nanjing', eyebrow:'03 / Practice', city:'Nanjing', country:'Jiangsu, China', title:'CYG Changyuan internship', description:'A professional stop in Nanjing, connecting the classroom to product-minded engineering and the discipline of shipping useful work.', coordinates:[32.0603,118.7969], year:'Internship' }
+      ];
+      const map = L.map('map', { zoomControl:false, scrollWheelZoom:false, attributionControl:true });
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:18, attribution:'&copy; OpenStreetMap contributors' }).addTo(map);
+      L.polyline(stops.map(stop => stop.coordinates), { color:'#ff5b22', weight:2, opacity:.78, dashArray:'8 10' }).addTo(map);
+      const markers = {};
+      const list = document.getElementById('stop-list');
+      function markerIcon(index, city) {
+        return L.divIcon({ className:'route-marker-wrap', html:'<button class="route-marker" aria-label="'+city+'"><span>'+String(index + 1).padStart(2, '0')+'</span></button>', iconSize:[42,42], iconAnchor:[21,21] });
+      }
+      function selectStop(stop) {
+        document.getElementById('active-eyebrow').textContent = stop.eyebrow;
+        document.getElementById('active-place').innerHTML = stop.city + ', <span>' + stop.country + '</span>';
+        document.getElementById('active-title').textContent = stop.title;
+        document.getElementById('active-description').textContent = stop.description;
+        document.getElementById('active-year').textContent = stop.year;
+        [...list.children].forEach(element => element.classList.toggle('active', element.dataset.stop === stop.id));
+        map.flyTo(stop.coordinates, 5, { duration:.85 });
+        markers[stop.id].openTooltip();
+      }
+      stops.forEach((stop, index) => {
+        const marker = L.marker(stop.coordinates, { icon:markerIcon(index, stop.city) }).addTo(map).bindTooltip('<strong>'+stop.city+'</strong><br>'+stop.country, { direction:'top', offset:[0,-20], className:'route-tooltip' });
+        marker.on('click', () => selectStop(stop));
+        markers[stop.id] = marker;
+        const button = document.createElement('button');
+        button.type = 'button'; button.className = 'stop-item'; button.dataset.stop = stop.id;
+        button.innerHTML = '<span>'+String(index + 1).padStart(2, '0')+'</span><strong>'+stop.city+'</strong><em>'+stop.country+'</em>';
+        button.addEventListener('click', () => selectStop(stop));
+        list.appendChild(button);
+      });
+      map.fitBounds(stops.map(stop => stop.coordinates), { padding:[74,74], maxZoom:4 });
+      selectStop(stops[1]);
+    </script>
+  </body>
+</html>
