@@ -6,7 +6,7 @@
     <meta name="description" content="Zhuo Liu's interactive portfolio — AI, systems, and quantitative research." />
     <title>Zhuo Liu — Portfolio</title>
     <link rel="preconnect" href="https://unpkg.com" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQx3vYI0yR6ezS6ixK0jzQW7B09P7mU=" crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
       :root { --paper:#f3f0e8; --ink:#152019; --muted:#697168; --line:#c9c7bd; --forest:#17392d; --signal:#ff5b22; --sand:#e5dfd0; }
       * { box-sizing: border-box; }
@@ -166,7 +166,7 @@
         { id:'kualalumpur', eyebrow:'02 / Learning', city:'Kuala Lumpur', country:'Malaysia', title:'Xiamen University Malaysia', description:'Studying Computer Science and Technology at Xiamen University Malaysia: turning ideas into working software across AI, web systems, and data.', coordinates:[3.139,101.6869], year:'2023 — now' },
         { id:'nanjing', eyebrow:'03 / Practice', city:'Nanjing', country:'Jiangsu, China', title:'CYG Changyuan internship', description:'A professional stop in Nanjing, connecting the classroom to product-minded engineering and the discipline of shipping useful work.', coordinates:[32.0603,118.7969], year:'Internship' }
       ];
-      const map = L.map('map', { zoomControl:false, scrollWheelZoom:false, attributionControl:true });
+      const map = L.map('map', { zoomControl:true, scrollWheelZoom:true, attributionControl:true });
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:18, attribution:'&copy; OpenStreetMap contributors' }).addTo(map);
       L.polyline(stops.map(stop => stop.coordinates), { color:'#ff5b22', weight:2, opacity:.78, dashArray:'8 10' }).addTo(map);
       const markers = {};
@@ -174,15 +174,17 @@
       function markerIcon(index, city) {
         return L.divIcon({ className:'route-marker-wrap', html:'<button class="route-marker" aria-label="'+city+'"><span>'+String(index + 1).padStart(2, '0')+'</span></button>', iconSize:[42,42], iconAnchor:[21,21] });
       }
-      function selectStop(stop) {
+      function selectStop(stop, moveMap = true) {
         document.getElementById('active-eyebrow').textContent = stop.eyebrow;
         document.getElementById('active-place').innerHTML = stop.city + ', <span>' + stop.country + '</span>';
         document.getElementById('active-title').textContent = stop.title;
         document.getElementById('active-description').textContent = stop.description;
         document.getElementById('active-year').textContent = stop.year;
         [...list.children].forEach(element => element.classList.toggle('active', element.dataset.stop === stop.id));
-        map.flyTo(stop.coordinates, 5, { duration:.85 });
-        markers[stop.id].openTooltip();
+        if (moveMap) {
+          map.flyTo(stop.coordinates, 5, { duration:.85 });
+          markers[stop.id].openTooltip();
+        }
       }
       stops.forEach((stop, index) => {
         const marker = L.marker(stop.coordinates, { icon:markerIcon(index, stop.city) }).addTo(map).bindTooltip('<strong>'+stop.city+'</strong><br>'+stop.country, { direction:'top', offset:[0,-20], className:'route-tooltip' });
@@ -195,7 +197,7 @@
         list.appendChild(button);
       });
       map.fitBounds(stops.map(stop => stop.coordinates), { padding:[74,74], maxZoom:4 });
-      selectStop(stops[1]);
+      selectStop(stops[1], false);
     </script>
   </body>
 </html>
