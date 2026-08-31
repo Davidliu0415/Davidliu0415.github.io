@@ -34,7 +34,11 @@
       .button.primary { background:var(--forest); color:white; }
       .button.ghost { color:var(--forest); }
       .button:hover, .text-link:hover, .contact-link:hover { color:var(--signal); }
-      .hero-index { align-self:end; border-top:3px solid var(--signal); padding-top:1rem; }
+      .hero-side { align-self:end; display:flex; flex-direction:column; gap:1.35rem; }
+      .portrait-frame { background:var(--sand); border-bottom:3px solid var(--signal); margin:0; overflow:hidden; }
+      .portrait-frame img { display:block; height:clamp(300px,31vw,420px); object-fit:cover; object-position:50% 52%; width:100%; }
+      .portrait-caption { color:var(--muted); font-size:.66rem; letter-spacing:.08em; margin:.65rem 0 0; text-transform:uppercase; }
+      .hero-index { border-top:3px solid var(--signal); padding-top:1rem; }
       .hero-index > p { font-size:.72rem; font-weight:700; letter-spacing:.12em; margin-bottom:2rem; text-transform:uppercase; }
       dl { margin:0; }
       dl div { border-top:1px solid var(--line); display:grid; gap:.5rem; grid-template-columns:85px 1fr; padding:.75rem 0; }
@@ -106,13 +110,19 @@
             <a class="button ghost" href="mailto:15114153515@163.com">Start a conversation</a>
           </div>
         </div>
-        <aside class="hero-index" aria-label="Portfolio summary">
-          <p>Field notes</p>
-          <dl>
-            <div><dt>Focus</dt><dd>AI / Systems / Quant</dd></div>
-            <div><dt>Based in</dt><dd>Kuala Lumpur</dd></div>
-            <div><dt>Currently</dt><dd>Building in public</dd></div>
-          </dl>
+        <aside class="hero-side" aria-label="Portrait and portfolio summary">
+          <figure class="portrait-frame">
+            <img src="./assets/zhuo-liu-portrait.jpg" alt="Zhuo Liu holding a Nikon camera by the sea" />
+          </figure>
+          <p class="portrait-caption">A camera, a coastline, and the next question.</p>
+          <div class="hero-index">
+            <p>Field notes</p>
+            <dl>
+              <div><dt>Focus</dt><dd>AI / Systems / Quant</dd></div>
+              <div><dt>Based in</dt><dd>Kuala Lumpur</dd></div>
+              <div><dt>Currently</dt><dd>Building in public</dd></div>
+            </dl>
+          </div>
         </aside>
       </section>
 
