@@ -44,6 +44,20 @@
       dl div { border-top:1px solid var(--line); display:grid; gap:.5rem; grid-template-columns:85px 1fr; padding:.75rem 0; }
       dt { color:var(--muted); font-size:.74rem; }
       dd { font-size:.78rem; margin:0; }
+      .affiliations { align-items:stretch; border-bottom:1px solid var(--line); display:grid; gap:1rem; grid-template-columns:minmax(150px,.48fr) minmax(0,1.52fr); padding-bottom:1rem; padding-top:1rem; }
+      .affiliations-heading { align-self:center; }
+      .affiliations-heading .eyebrow { margin-bottom:.5rem; }
+      .affiliations-heading p:last-child { color:var(--muted); font-size:.8rem; line-height:1.45; margin-bottom:0; max-width:175px; }
+      .affiliation-list { display:grid; gap:1rem; grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .logo-card { align-items:center; border:1px solid var(--line); display:flex; gap:1rem; min-height:110px; padding:1rem; }
+      .logo-card:hover { border-color:var(--signal); }
+      .logo-card img { display:block; flex:0 0 auto; height:62px; object-fit:contain; width:62px; }
+      .logo-copy { display:flex; flex-direction:column; gap:.28rem; }
+      .logo-copy strong { font-size:.8rem; letter-spacing:.02em; }
+      .logo-copy span { color:var(--muted); font-size:.7rem; line-height:1.35; }
+      .logo-card.cyg { background:var(--forest); border-color:var(--forest); color:var(--paper); }
+      .logo-card.cyg img { height:auto; max-width:155px; width:58%; }
+      .logo-card.cyg .logo-copy span { color:#aac3b3; }
       .journey,.work { padding-bottom:clamp(4rem,8vw,8rem); padding-top:clamp(4rem,8vw,7.5rem); }
       .section-heading { align-items:end; display:flex; gap:2rem; justify-content:space-between; margin-bottom:2.75rem; }
       .section-heading h2 { font-size:clamp(2.45rem,5vw,5rem); line-height:.96; margin-bottom:0; max-width:720px; }
@@ -86,7 +100,7 @@
       .closing h2 { font-size:clamp(2.7rem,6vw,6.3rem); line-height:.95; margin-bottom:2.8rem; max-width:1000px; }
       .contact-link { align-items:center; color:#ffb79f; display:inline-flex; font-size:clamp(1rem,2vw,1.55rem); gap:.45rem; text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:.26rem; }
       footer { align-items:center; background:var(--ink); border-top:1px solid #465048; color:#aab2aa; display:flex; font-size:.7rem; justify-content:space-between; letter-spacing:.04em; padding-bottom:1.1rem; padding-top:1.1rem; }
-      @media (max-width:800px) { header { align-items:flex-start; gap:1rem; } nav { align-items:flex-end; flex-direction:column; gap:.55rem; } .hero,.journey-layout { grid-template-columns:1fr; } .hero { min-height:auto; } .section-heading { align-items:flex-start; flex-direction:column; gap:1rem; } .section-heading > p { margin-bottom:0; } .map-frame,#map,.stop-panel { min-height:480px; } #map { height:480px; } .project-grid { grid-template-columns:1fr; } .project-card,.project-card:first-child { border-left:1px solid var(--line); border-top:0; } .project-card:first-child { border-top:1px solid var(--line); } .project-card > p:not(.project-description) { margin-top:2.75rem; } footer { align-items:flex-start; flex-direction:column; gap:.5rem; } }
+      @media (max-width:800px) { header { align-items:flex-start; gap:1rem; } nav { align-items:flex-end; flex-direction:column; gap:.55rem; } .hero,.journey-layout,.affiliations { grid-template-columns:1fr; } .hero { min-height:auto; } .affiliations-heading p:last-child { max-width:none; } .affiliation-list { grid-template-columns:1fr; } .section-heading { align-items:flex-start; flex-direction:column; gap:1rem; } .section-heading > p { margin-bottom:0; } .map-frame,#map,.stop-panel { min-height:480px; } #map { height:480px; } .project-grid { grid-template-columns:1fr; } .project-card,.project-card:first-child { border-left:1px solid var(--line); border-top:0; } .project-card:first-child { border-top:1px solid var(--line); } .project-card > p:not(.project-description) { margin-top:2.75rem; } footer { align-items:flex-start; flex-direction:column; gap:.5rem; } }
     </style>
   </head>
   <body>
@@ -124,6 +138,23 @@
             </dl>
           </div>
         </aside>
+      </section>
+
+      <section class="affiliations shell" aria-labelledby="affiliations-title">
+        <div class="affiliations-heading">
+          <p class="eyebrow" id="affiliations-title">Academic / Industry</p>
+          <p>The institutions shaping my route.</p>
+        </div>
+        <div class="affiliation-list">
+          <a class="logo-card" href="https://www.xmu.edu.my/" target="_blank" rel="noreferrer">
+            <img src="./assets/logos/xmum.png" alt="Xiamen University Malaysia logo" />
+            <span class="logo-copy"><strong>Xiamen University Malaysia</strong><span>Computer Science and Technology</span></span>
+          </a>
+          <a class="logo-card cyg" href="https://www.cyg.com/en/" target="_blank" rel="noreferrer">
+            <img src="./assets/logos/cyg.png" alt="CYG Changyuan Technology Group logo" />
+            <span class="logo-copy"><strong>CYG Changyuan</strong><span>Internship experience</span></span>
+          </a>
+        </div>
       </section>
 
       <section id="journey" class="journey shell">
